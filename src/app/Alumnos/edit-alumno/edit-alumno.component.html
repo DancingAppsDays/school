@@ -1,0 +1,33 @@
+<div class="container">
+   
+    <div class="col-sm text-center">
+      <h4  *ngIf="this.datarouted.id == null"class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Registrar Alumno</h4>
+      <h4  *ngIf="this.datarouted.id != null"class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Editar Alumno</h4>
+   
+    </div>
+  
+
+
+<form    [formGroup] ="formu"  (ngSubmit)="onSubmit(formu.value)" >
+
+    <p>                                                 <!--//to avoid formcontrol error-->
+        <input type="number" readonly   name="idss" class="form-control" formControlName="id"  >
+        <strong>ID: </strong> 
+    </p>
+  <p>                                                 <!--//to avoid formcontrol error-->
+      <input type="text" name="fullNamessss" class="form-control" formControlName="fullName"  >
+      <strong>Nombre: </strong> 
+  </p>
+  <p>
+      <input type="date" name="birthdayssss" class="form-control" formControlName="birthday"  >
+      <strong>Fecha Nacimiento: </strong> 
+  </p>
+
+  
+ 
+  
+<button class ="btn btn-success" type ="submit"   [disabled]="formu.invalid">Registrar</button>
+
+</form>
+
+<pre style="clear: both;">{{ formu.value | json }}</pre> 

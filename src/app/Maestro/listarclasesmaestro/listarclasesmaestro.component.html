@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="form-group row">
+      <div class="col-sm text-center">
+        <h4 class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Cursos que enseñas</h4>
+      </div>
+    </div>
+
+   
+
+    <input type="text" [(ngModel)]="searchterm" placeholder="Buscar cadena">
+  
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  
+  <table class="table" *ngIf="data">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Carrera</th>
+        <th scope="col">Fecha de inicio</th>
+        <th scope="col">Fecha de cierre</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ems of data  | filterPipe: searchterm | paginate: { itemsPerPage: 10, currentPage: page }">
+        <th scope="row">{{ ems.id }}</th>
+        <td>{{ ems.name }}</td>
+        <td>{{ ems.carrera }}</td>
+        <td>{{ ems.fechadeinicio }}</td>
+        <td>{{ ems.fechadefin }}</td>
+        <td> <button type="button" class="btn btn-primary" title="Editar" (click)="calificarcurso(ems)">Calificar</button> </td>
+       
+      </tr>
+    </tbody>
+  </table>
