@@ -28,8 +28,10 @@
         <td>{{ ems.name }}</td>
         <td>{{ ems.carrera }}</td>
         <td>{{ ems.fechadeinicio }}</td>
-        <td>{{ ems.fechadefin }}</td>
-        <td> <button type="button" class="btn btn-primary" title="Editar" (click)="calificarcurso(ems)">Calificar</button> </td>
+        <td>{{ ems.fechadefinal }}</td>
+        <td> <button type="button" class="btn btn-primary" title="Editar" (click)="calificarcurso(ems)">Calificar</button> 
+          <button type="button" class="btn btn-primary" title="Editar" (click)="Asistencia(ems)">Asistencia</button>
+        </td>
        
       </tr>
     </tbody>

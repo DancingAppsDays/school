@@ -73,7 +73,7 @@ export class ListarclasesmaestroComponent implements OnInit {
               console.log(res);
              
               this.data= res ;
-             
+              this.data = this.data['data'];
   
   
   
@@ -93,7 +93,7 @@ export class ListarclasesmaestroComponent implements OnInit {
   
   updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;//[0];
   
   this.formu.patchValue({
       id: res.id,
@@ -115,7 +115,26 @@ export class ListarclasesmaestroComponent implements OnInit {
         namecurso:contentdata.name,
         fechadeinicio:contentdata.fechadeinicio,
         idmaestro:contentdata.idmaestro ,      
-         namecarrera:contentdata.namecarrera,        
+         namecarrera:contentdata.namecarrera,
+         periodo:contentdata.periodo,        
+       fechadefinal:contentdata.fechadefinal
+      }
+    })
+  
+  }
+
+  Asistencia(contentdata: any){
+  
+    console.log(contentdata);
+    this.router.navigate(['Asistencia'],{
+      queryParams:{
+        nombreprofesor:this.datarouted.name,
+        idcurso:contentdata.id,
+        namecurso:contentdata.name,
+        fechadeinicio:contentdata.fechadeinicio,
+        idmaestro:contentdata.idmaestro ,      
+         namecarrera:contentdata.namecarrera,
+         periodo:contentdata.periodo,        
        fechadefinal:contentdata.fechadefinal
       }
     })

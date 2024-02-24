@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css"
+/*@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');*/
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+/*@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css"; //DEPRECATED
+//@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+// OR npm i @ag-grid-community/styles@latest
+
+
+@import '~ag-grid-community/styles/ag-grid.css';
+@import '~ag-grid-community/styles/ag-theme-alpine.css';*/
+
+@import '@ag-grid-community/styles/ag-grid.css';
+@import '@ag-grid-community/styles/ag-theme-alpine.css';
+
+.btn.btn-success[disabled] {
+    background-color: #68686886;
+}

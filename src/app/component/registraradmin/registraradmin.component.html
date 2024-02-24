@@ -9,18 +9,25 @@
 
 <form    [formGroup] ="formu"  (ngSubmit)="onSubmit(formu.value)" >
 
-    <p>                                                 <!--//to avoid formcontrol error-->
-        <input type="number" readonly   name="idss" class="form-control" formControlName="id"  >
-        <strong>ID: </strong> 
-    </p>
+   
   <p>                                                 <!--//to avoid formcontrol error-->
-      <input type="text" name="fullNamessss" class="form-control" formControlName="fullName"  >
+      <input type="text" name="fullNamessss" class="form-control" formControlName="username"  >
       <strong>Nombre: </strong> 
   </p>
   <p>
-      <input type="date" name="birthdayssss" class="form-control" formControlName="birthday"  >
-      <strong>Fecha Nacimiento: </strong> 
-  </p>
+    <input type="email"  class="form-control" formControlName="email" email >
+    <strong>Emaild: </strong> 
+</p>   
+    <div *ngIf="formu.controls['email'].invalid && (formu.controls['email'].dirty || formu.controls['email'].touched)"  class="alert alert-info">
+             Ingresa un email válido</div>
+
+           
+  
+   
+   <p>
+    <input type="email"  class="form-control" formControlName="password"  minlength="6">
+    <strong>Password: </strong> 
+   </p>
 
   
  
@@ -28,5 +35,3 @@
 <button class ="btn btn-success" type ="submit"   [disabled]="formu.invalid">Registrar</button>
 
 </form>
-
-<pre style="clear: both;">{{ formu.value | json }}</pre> 

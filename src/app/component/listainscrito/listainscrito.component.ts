@@ -75,6 +75,7 @@ export class ListainscritoComponent implements OnInit {
               console.log(res);
              
               this.data= res ;
+              this.data = this.data['data']
           },
           error:error=>console.log(error)
         
@@ -91,7 +92,7 @@ export class ListainscritoComponent implements OnInit {
   
   updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;//[0];
   
   this.formu.patchValue({
       id: res.id,
@@ -106,14 +107,14 @@ export class ListainscritoComponent implements OnInit {
 
     this.http.delete(Constants.URL+"inscrito/"+curso.id).subscribe(
       {
-          next: res=> {
+          next: res => {
               //console.log(res);
               window.alert("Registro borrado")
               //this.router.navigate(['ListaInscrito']); //not refreshes
               this.getCali(this.datarouted.id)  
              
           },
-          error:error=>console.log(error)
+          error:error =>console.log(error)
         
        } );
 

@@ -29,12 +29,17 @@ export class ListaAlumnoComponent implements OnInit {
     this._http.get(Constants.URL+"alumno").subscribe({
       
       next: res=> {
-        console.log(res);       
-        this.data= res ;  
+        //console.log(res);       
+        this.data= res ;
+        if(this.data['status'] == "success"){
+
+          this.data = this.data['data'];
+          //console.log("success");  
+        }
     },
     error:error=>{
       console.log(error);
-      window.alert("Falla de conexión: " + error.name);
+      window.alert("Falla de conexión: ");// + error.error.name);
       
     }
     });

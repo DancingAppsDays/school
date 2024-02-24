@@ -21,7 +21,8 @@
         <th scope="col">fechadeinicio</th>
         <th scope="col">Fecha termino</th>
         <th scope="col">Nombre carrera/Diploma</th>
-        <th scope="col">id del maestro</th>
+        <th scope="col">Periodo</th>
+        <th scope="col">Nombre maestro</th>
         <th scope="col">ACCION</th>
       </tr>
     </thead>
@@ -31,7 +32,8 @@
         <td>{{ ems.fechadeinicio }}</td>
         <td>{{ ems.fechadefinal }}</td>
         <td>{{ ems.namecarrera}}</td>
-        <td>{{ ems.idmaestro }}</td>
+        <td>{{ ems.periodo}}</td>
+        <td>{{ ems.namemaestro }}</td>
         <td> <button type="button" class="btn btn-primary" title="Editar" (click)="editcurso(ems)">Editar</button> </td>
       </tr>
     </tbody>

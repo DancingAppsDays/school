@@ -32,6 +32,7 @@ export class ListacursosComponent implements OnInit {
       next: res=> {
         console.log(res);       
         this.data= res ;  
+        this.data = this.data['data'];
     },
     error:error=>{
       console.log(error);

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Constants } from './constants';
+import { empty } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +18,10 @@ export class AppComponent {
 
   static myapp: any;
   usertype:any="undefined"
+Name: string;
 
 
-  constructor( private htt:HttpClient) { }
+  constructor( private htt:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
     console.log("initapp")
@@ -26,7 +29,10 @@ export class AppComponent {
     
         //on init session is always clean
       //this.sesion = sessionStorage.getItem('session');
-    
+      if(Constants.usertype="empty"){
+        console.log("WEnt to login")
+        //this.router.navigate(['Login'])
+      }
     }
 
     logout(){
@@ -66,6 +72,7 @@ export class AppComponent {
       //this.sesion = sessionStorage.getItem('session');    //how bad is performance??
       this.sesion = (Constants.session);
       this.usertype = Constants.usertype
+      this.Name = sessionStorage['name'];
       //console.log(this.sesion);
       //console.log("dochecked");
     }

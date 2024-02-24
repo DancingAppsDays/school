@@ -4,36 +4,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Constants } from 'src/app/constants';
 
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-editcurso',
   templateUrl: './editcurso.component.html',
-  styleUrls: ['./editcurso.component.css']
+  styleUrls: ['./editcurso.component.css'],
+ providers: [DatePipe]
 })
 export class EditcursoComponent implements OnInit {
 
   formu: FormGroup;
   datarouted: any;
   datacurso:any;
+  successdata:any;
 
   maestros:any;
   maesid:Number;
   currentmae:any;
+
+
   
   constructor(    private formBuilder: FormBuilder ,private router: Router,  private http :HttpClient,
-    private router2: ActivatedRoute, /*private alertService: AlertService*/ ) {   }
+    private router2: ActivatedRoute, private datepipe: DatePipe /*private alertService: AlertService*/ ) {   }
 
   ngOnInit(): void {
 
     if(Constants.usertype!="Admin")this.router.navigate(['/'])
+ 
+    let today =  new Date();
+    let todays = this.datepipe.transform(today, 'yyyy-MM-dd'); 
 
     this.formu = this.formBuilder.group({
-      id:'',
+     // id:'',
       name:['',[Validators.required,]],
      idmaestro:0,
-      fechadeinicio:'',
-      fechadefinal:'',
+      fechadeinicio:todays,
+      fechadefinal:todays,
       namecarrera:'',
-      namemaestro:'',
+      periodo:'',
+      namemaestro:'',//['',[Validators.required,]], //was gonna leave for inscripcion check but...
 
      
 
@@ -69,7 +79,8 @@ export class EditcursoComponent implements OnInit {
 
               
               this.datacurso= res ;
-              this.maesid = this.datacurso[0].idmaestro;
+              this.datacurso = this.datacurso['data']
+              this.maesid = this.datacurso.idmaestro;
 
               //console.log(this.maesid)
               this.updateform(this.datacurso);
@@ -111,21 +122,20 @@ export class EditcursoComponent implements OnInit {
    this.http.post(Constants.URL+"curso",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe(
      {
       next: res=> {
-        console.log(res);
-       
-        this.datacurso= res ;
-        
+        this.successdata= res;
 
+        if(this.successdata['status']=='success'){
 
-
-    },
-    error:error=>console.log(error)
-
-
-
-  // this.updateform(this.exs);
-  
- } );
+        window.alert("Elemento modificado correctamente");
+        }else{
+          //console.log(this.successdata)
+          window.alert("  Registro falló");
+        }
+        //this.router.navigate(['/']);
+       }, error:
+      error =>{ window.alert("  Registro falló");
+      console.log(error.error.message);}
+       });
  }
 
  putcurso(customerData:any,idd: number)
@@ -134,19 +144,23 @@ export class EditcursoComponent implements OnInit {
 
 
 
-   this.http.post(Constants.URL+"curso"+'/'+idd, customerData).subscribe(data =>
+   this.http.patch(Constants.URL+"curso"+'/'+idd, customerData).subscribe(
+    {next: data =>
      {//console.log(data);
        window.alert("Elemento modificado correctamente");
        //this.router.navigate(['/']);
-      }, 
+      }, error:
      error =>{ window.alert("  Registro falló");
-     console.log(error.name);}
-     );
- }
+     console.log(error.name);
+     console.log(error);
+        }
+      });
+  
+    }
 
  updateform(resp: any) {
   //console.log(res[0])
-    let curso= resp[0];
+    let curso= resp;//[0];
 
   this.formu.patchValue({
     id:curso.id,
@@ -154,6 +168,7 @@ export class EditcursoComponent implements OnInit {
     fechadeinicio:curso.fechadeinicio,
     fechadefinal:curso.fechadefinal,
     namecarrera:curso.namecarrera,
+    periodo:curso.periodo,
     idmaestro:curso.idmaestro,
     namemaestro:curso.namemaestro
 
@@ -170,6 +185,7 @@ export class EditcursoComponent implements OnInit {
     next: res=>{
    
     this.maestros = res;
+    this.maestros =this.maestros['data'];
     
   },error:error =>{ window.alert("Error de conexión");   //error.message);
   //console.log(error.error.message);
@@ -188,5 +204,10 @@ export class EditcursoComponent implements OnInit {
     this.formu.controls['idmaestro'].setValue(value.id)
     this.formu.controls['namemaestro'].setValue(value.fullName)
   }
+
+
+  periodos = [
+    '', 'I','II','III','IV','V','VI','VII','VIII','IX','X'
+  ]
 
 }

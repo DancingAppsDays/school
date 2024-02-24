@@ -47,6 +47,7 @@ export class CalificarclasemaestroComponent implements OnInit {
     this.formu = this.formBuilder.group({       
         Cursoname:'',
         Carreraname:'',
+        periodo:'',
         FechaInicio:'',
         FechaFinal:''
   
@@ -71,6 +72,7 @@ export class CalificarclasemaestroComponent implements OnInit {
       //fullName: contentdata.fullName,
       Cursoname:contentdata.namecurso,
         Carreraname:contentdata.namecarrera,
+        periodo:contentdata.periodo,
         FechaInicio:contentdata.fechadeinicio,
         FechaFinal:contentdata.fechadefinal
   })
@@ -85,7 +87,7 @@ export class CalificarclasemaestroComponent implements OnInit {
               console.log(res);
              
               this.data= res ;
-             
+              this.data = this.data['data']
   
   
   
@@ -105,7 +107,7 @@ export class CalificarclasemaestroComponent implements OnInit {
   
   updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;//[0];
   
   this.formu.patchValue({
       id: res.id,
@@ -139,7 +141,8 @@ export class CalificarclasemaestroComponent implements OnInit {
     //console.log(newdata);
 
     for(let i=0; i<this.data.length; i++){
-      this.data[i].calificacion = newdata[i]
+      this.data[i].calificacion = newdata[i];
+      if (this.data[i].calificacion>10)  this.data[i].calificacion =10;
  }
 
       //console.log(this.data);

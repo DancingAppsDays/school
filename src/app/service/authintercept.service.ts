@@ -32,7 +32,8 @@ export class AuthinterceptService implements HttpInterceptor {
       this.usertype = "emptyuser";
     }
 
-
+    //console.log(this.usertype);
+    //console.log(this.token);
   
     httpRequest = httpRequest.clone({
       setHeaders: {

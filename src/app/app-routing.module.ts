@@ -12,10 +12,15 @@ import { ListarclasesmaestroComponent } from './Maestro/listarclasesmaestro/list
 import { CalificarclasemaestroComponent } from './Maestro/calificarclasemaestro/calificarclasemaestro.component';
 import { LoginComponent } from './login/login.component';
 import { ListainscritoComponent } from './component/listainscrito/listainscrito.component';
+import { RegistraradminComponent } from './component/registraradmin/registraradmin.component';
+import { AsistenciaComponent } from './Maestro/asistencia/asistencia.component';
+import { PreinscripdocComponent } from './Alumnos/preinscripdoc/preinscripdoc.component';
+
 
 const routes: Routes = [
 
     {path: 'Login', component:LoginComponent},
+    {path:'RegistrarAdmin',component:RegistraradminComponent},
   {path: 'ListaMaestro', component:ListamaestrosComponent},
   {path: 'EditMaestro', component:EditmaestroComponent},
   {path: 'EditAlumno', component:EditAlumnoComponent},
@@ -27,10 +32,16 @@ const routes: Routes = [
   {path:'EditCurso',component:EditcursoComponent},
 
   {path:'KardexAlumno',component:KardexComponent},
+
+  {path:'Preinscripdoc',component:PreinscripdocComponent},
+
+
+
   {path:'ListaClaseMaestro',component:ListarclasesmaestroComponent},
-  {path:'CalificarClase',component:CalificarclasemaestroComponent}
+  {path:'CalificarClase',component:CalificarclasemaestroComponent},
+  {path:'Asistencia',component:AsistenciaComponent},
 
-
+ 
 ];
 
 @NgModule({

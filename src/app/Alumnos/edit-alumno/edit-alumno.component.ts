@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Constants } from 'src/app/constants';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-edit-alumno',
   templateUrl: './edit-alumno.component.html',
@@ -14,6 +16,7 @@ export class EditAlumnoComponent implements OnInit {
   formu: FormGroup;
   datarouted:any;
   dataalumno:any;
+  successdata:any;
 
 
   constructor(    private formBuilder: FormBuilder ,private router: Router,  private http :HttpClient,
@@ -27,13 +30,15 @@ export class EditAlumnoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(Constants.usertype!="Admin")this.router.navigate(['/'])
+   // if(Constants.usertype!="Admin")this.router.navigate(['/'])
 
     //this should be taken from entity
     this.formu = this.formBuilder.group({
-        id:'',
+        //id:'',
         fullName:['',[Validators.required,]],
-        birthday:0
+        birthday:"2000-01-15",
+        email:['',[Validators.required,]],
+        password:['',[Validators.required,]]
 
 
 
@@ -62,6 +67,8 @@ getAlumno(index: number) //check if number..
               console.log(res);
              
               this.dataalumno= res ;
+              this.dataalumno = this.dataalumno['data']
+              //console.log(this.dataalumno)
               this.updateform(this.dataalumno);
 
 
@@ -93,30 +100,30 @@ getAlumno(index: number) //check if number..
   //var data:Responsetype;
  
   
-   this.http.post(Constants.URL+"alumno",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe(data =>
-     {
-       let response : any = data;
+   this.http.post(Constants.URL+"RegistroA",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe({
+    next: data =>
+      {//console.log(data);
+        //window.alert("Elemento modificado correctamente");
+        //this.router.navigate(['/']);
+        this.successdata= data;
 
-       console.log(response);
-       /*
-       if(response["data"] == "success"){
+        if(this.successdata['status']=='success'){
 
-       console.log(response);
-     window.alert(response['mensaje']);   //debe decir agregadooo
-     this.router.navigate(['/']);}
-     else{
+        window.alert("Elemento modificado correctamente");
+        }else{
+          //console.log(this.successdata)
+          window.alert("  Registro falló, revisa que el correo no sea repetido");
+        }
+        //this.router.navigate(['/']);
+       
 
-       window.alert(response['mensaje']  + "  Registro falló");// + '    No autorizado');
-       //this.router.navigate(['/']);
 
-     }*/
-    }, 
-     error =>{
-       console.log(error.error.name);
-       window.alert("Error: Registro falló "+ error.error.name);
+       }, error:
+      error =>{ window.alert("  Registro falló");
+      console.log(error);}
+       });
+   
      }
-   );
- }
 
  putmaestro(customerData:any,idd: number)
  {  
@@ -132,12 +139,15 @@ getAlumno(index: number) //check if number..
 
  updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;
 
   this.formu.patchValue({
-      id: res.id,
+      //id: res.id,
       fullName: res.fullName,
-      birthday: res.birthday
+      birthday: res.birthday,
+      email: res.email,
+      password:res.password
+    
 
   })
 

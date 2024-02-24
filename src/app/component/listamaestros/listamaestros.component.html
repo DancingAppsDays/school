@@ -18,8 +18,9 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Puesto</th>
-        <th scope="col">lastcheck</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -28,7 +29,8 @@
         <th scope="row">{{ ems.id }}</th>
         <td>{{ ems.fullName }}</td>
         <td>{{ ems.birthday }}</td>
-        <td>{{ ems.ereara }}</td>
+        <td>{{ ems.email}}</td>
+        <td>{{ ems.password }}</td>
         <td> <button type="button" class="btn btn-primary" title="Editar" (click)="editMaestro(ems)">Editar</button> </td>
       </tr>
     </tbody>

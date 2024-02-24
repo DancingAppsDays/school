@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.ff = this.fb.group({
-      username: ['', Validators.required],  //was username....
+      email: ['', Validators.required],  //was username....
       password: ['', Validators.required],
     })
   }
@@ -54,39 +54,48 @@ export class LoginComponent implements OnInit {
   onLoginSubmit(logindata:any) { 
    
 
-    return this.htt.post(Constants.URL+"Auth/Login", logindata).subscribe((res) => {
+    return this.htt.post(Constants.URL+"Login", logindata).subscribe((res) => {
         this.successdata = res;
        // let resp:any = res;
 
-        console.log(res);
+        //console.log(res);
         
         if(this.successdata['status'] == "success")
         {
-            window.alert("Bienvenido " + this.successdata['payload']['username']+" a la plataforma CIET");
+            window.alert("Bienvenido " + this.successdata['data']['name']+" a la plataforma CIET");
             
-            let token = this.successdata['access_token'];  //was res but cant be used like this anymopre
+            let token = this.successdata['data']['access_token'];  //was res but cant be used like this anymopre
             localStorage.setItem("access_token",token);//already set on authintercept//'Bearer ' +token);
 
-            sessionStorage.setItem("name",this.successdata['payload']['username']);
+            sessionStorage.setItem("name",this.successdata['data']['name']);
           
               //console.log( this.successdata['payload'])
-            Constants.userId  = this.successdata['payload']['userId'];
+            Constants.userId  = this.successdata['data']['userId'];
             Constants.session = true;
-            Constants.usertype = this.successdata['payload']['usertype'];
+            Constants.usertype = this.successdata['data']['usertype'];
+
+            console.log(Constants.usertype)
            // sessionStorage.setItem("session","true");                       //experimental sess
             //sessionStorage.setItem("usertype",this.successdata['payload']['usertype']); 
 
             //AppComponent.myapp.usertype = this.successdata['payload']['usertype'];
 
-            
-            this.router.navigate(['/']);
-            console.log(Constants.usertype)
+            if(Constants.usertype == "Student"){
+              this.router.navigate(['KardexAlumno']);
+            }else   if(Constants.usertype == "Profesor"){
+            this.router.navigate(['ListaClaseMaestro']);
+              
+            }else if(Constants.usertype == "Admin"){
+              this.router.navigate(['/']);
+            }
+           // console.log(Constants.usertype)
             
 
           
         }else if(this.successdata['status'] == "error")
         {
-          window.alert(this.successdata['error']);//"Datos de login incorrectos");
+          console.log("ERROR no coinciden")
+          window.alert(this.successdata['message']);//"Datos de login incorrectos");
          /* Swal.fire({
           title: 'OPPS!!',
           text:   "Login details are not coreect.",
@@ -101,7 +110,7 @@ export class LoginComponent implements OnInit {
         
     },  
     error =>{ window.alert("Error de conexión");   //error.message);
-        console.log(error.message);}
+        console.log(error);}
     
     );
   }

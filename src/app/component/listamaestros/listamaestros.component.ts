@@ -32,8 +32,8 @@ export class ListamaestrosComponent implements OnInit {
     this._http.get(Constants.URL+"maestro").subscribe(data => {
 
       this.sucessdata = data;
-      console.log(this.sucessdata);
-      this.data = data;
+      //console.log(this.sucessdata);
+      this.data = this.sucessdata['data'];
       /*
       if(this.sucessdata['status'] == "success"){
 

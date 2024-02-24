@@ -1,3 +1,15 @@
+
+<head>
+  <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+  <link    href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">  
+  <link    href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
+</head>
+
+
+
+
+
+
 <div class="container">
     <div class="form-group row">
       <div class="col-sm text-center">
@@ -6,7 +18,7 @@
     </div>
 
    
-
+<!--
     <input type="text" [(ngModel)]="searchterm" placeholder="Buscar cadena">
   
     <pagination-controls (pageChange)="page = $event"></pagination-controls>
@@ -14,22 +26,37 @@
   <table class="table" *ngIf="data">
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">idalumno</th>
-        <th scope="col">idcurso</th>
-        <th scope="col">idmaestro</th>
+        <th scope="col">Nombre del curso</th>
+        <th scope="col">Nombre de la carrera</th>
+        <th scope="col">Periodo</th>
+        <th scope="col">Calificación</th>
        
-        <th scope="col">Calificacion</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ems of data  | filterPipe: searchterm | paginate: { itemsPerPage: 10, currentPage: page }">
-        <th scope="row">{{ ems.id }}</th>
-        <td>{{ ems.idalumno }}</td>
-        <td>{{ ems.idcurso }}</td>
-        <td>{{ ems.idmaestro }}</td>
-        <td>{{ ems.calificacion }}</td>
+        <th scope="row">{{ ems.namecurso }}</th>
+        <td>{{ ems.namecarrera }}</td>
+        <td>{{ ems.periodo }}</td>
+        <td   [ngStyle]="{'background-color': ems.calificacion>6? 'green':'red'}"><strong>{{ ems.calificacion }}</strong></td>
+       
        
       </tr>
     </tbody>
   </table>
+-->
+
+  <ag-grid-angular
+    
+    class="ag-theme-alpine"
+    style=" height:800px;"
+  
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions" 
+      [rowClassRules]="gridOptions.rowClassRules"
+        
+
+        
+>
+</ag-grid-angular>

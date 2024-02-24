@@ -19,7 +19,7 @@ export class EditmaestroComponent implements OnInit {
   formu: FormGroup;
   maestrorouted:any;
   datamaestro:any;
-
+  successdata:any;
   
 
   constructor(    private formBuilder: FormBuilder ,private router: Router,  private http :HttpClient,
@@ -37,11 +37,11 @@ export class EditmaestroComponent implements OnInit {
 
     //this should be taken from entity
     this.formu = this.formBuilder.group({
-        id:'',
+        //id:'',
         fullName:['',[Validators.required,]],
-        birthday:0,
-        //bogus:0
-
+        birthday:"2000-01-15",
+        email:['',[Validators.required,]],
+        password:['',[Validators.required,]]
 
 
     });
@@ -70,6 +70,7 @@ export class EditmaestroComponent implements OnInit {
               console.log(res);
              
               this.datamaestro= res ;
+              this.datamaestro=this.datamaestro['data'];
               this.updateform(this.datamaestro);
 
 
@@ -87,7 +88,7 @@ export class EditmaestroComponent implements OnInit {
 
   onSubmit(formudata:any){
 
-    console.log(formudata);
+    //console.log(formudata);
 
     if(this.maestrorouted.id !=undefined){     
       //console.log("not null patch no post");
@@ -102,29 +103,25 @@ export class EditmaestroComponent implements OnInit {
  {
   //console.log(customerData);
   
-   this.http.post(Constants.URL+"maestro",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe(data =>
-     {
-       let response : any = data;
+   this.http.post(Constants.URL+"RegistroP",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe({
+    next: data =>
+      {//console.log(data);
+        this.successdata= data;
 
-       console.log(response);
-       /*
-       if(response["data"] == "success"){
+        if(this.successdata['status']=='success'){
 
-       console.log(response);
-     window.alert(response['mensaje']);   //debe decir agregadooo
-     this.router.navigate(['/']);}
-     else{
-
-       window.alert(response['mensaje']  + "  Registro falló");// + '    No autorizado');
-       //this.router.navigate(['/']);
-
-     }*/
-    }, 
-     error =>{
-       console.log(error);
-       window.alert("Error: Registro falló "+ error);
-     }
-   );
+        window.alert("Elemento modificado correctamente");
+        }else{
+          //console.log(this.successdata)
+          window.alert("  Registro falló, revisa que el correo no sea repetido");
+        }
+        //this.router.navigate(['/']);
+       }, error:
+      error =>{ window.alert("  Registro falló");
+      console.log(error.error.message);}
+       });
+   
+     
  }
 
  putmaestro(customerData:any,idd: number)
@@ -141,12 +138,14 @@ export class EditmaestroComponent implements OnInit {
 
  updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;//[0];
 
   this.formu.patchValue({
-      id: res.id,
+      //id: res.id,
       fullName: res.fullName,
-      birthday: res.birthday
+      birthday: res.birthday,
+      email: res.email,
+      password:res.password
 
   })
 

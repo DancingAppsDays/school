@@ -14,7 +14,7 @@ export class RegistraradminComponent implements OnInit {
   formu: FormGroup;
   maestrorouted:any;
   datamaestro:any;
-
+  successdata:any;
   
 
   constructor(    private formBuilder: FormBuilder ,private router: Router,  private http :HttpClient,
@@ -32,9 +32,10 @@ export class RegistraradminComponent implements OnInit {
 
     //this should be taken from entity
     this.formu = this.formBuilder.group({
-        id:'',
-        fullName:['',[Validators.required,]],
-        birthday:0,
+        
+        username:['',[Validators.required,]],
+        email:['',[Validators.required,]],
+        password:['',[Validators.required,]]
       
     });
 
@@ -62,6 +63,7 @@ export class RegistraradminComponent implements OnInit {
               console.log(res);
              
               this.datamaestro= res ;
+              this.datamaestro= this.datamaestro['data']
               this.updateform(this.datamaestro);
 
 
@@ -90,24 +92,32 @@ export class RegistraradminComponent implements OnInit {
  {
   //console.log(customerData);
   
-   this.http.post(Constants.URL+"users",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe(data =>
-     {
-       let response : any = data;
+   this.http.post(Constants.URL+"Registro",customerData/*,  { headers: { Authorization:localStorage.getItem('token') } }*/).subscribe({
 
-       console.log(response);
+    next:data=>
+     {
+      this.successdata= data;
+
+      if(this.successdata['status']=='success'){
+
+      window.alert("Elemento modificado correctamente");
+      }else{
+        //console.log(this.successdata)
+        window.alert("  Registro falló, revisa que el correo no sea repetido");
+      }
+      //this.router.navigate(['/']);
+     }, error:
+    error =>{ window.alert("  Registro falló");
+    console.log(error.error.message);}
+     });
      
-    }, 
-     error =>{
-       console.log(error);
-       window.alert("Error: Registro falló "+ error.error.mensaje);
-     }
-   );
+   
  }
 
 
  updateform(resp: any) {
   //console.log(res[0])
-    let res= resp[0];
+    let res= resp;//[0];
 
   this.formu.patchValue({
       id: res.id,

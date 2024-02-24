@@ -34,7 +34,7 @@
 </p>
 </form>
    
-    <input type="text" [(ngModel)]="searchterm" placeholder="Buscar..">
+    <input type="text" [(ngModel)]="searchterm" placeholder="Alumno..">
   
     <pagination-controls (pageChange)="page = $event"></pagination-controls>
   
@@ -44,17 +44,32 @@
        
         <th scope="col">Nombre Alumno</th>
         
-        <th scope="col">Calificar</th>
+        <th scope="col" *ngFor="let day of fechas; let i=index">Clase {{i+1}} </th>
+        
+        <!--<th scope="col">Clase 1</th>
+        <th scope="col">Clase 2</th>
+        <th scope="col">Clase 3</th>
+        <th scope="col">Clase 4</th>
+        <th scope="col">Clase 5</th>
+        <th scope="col">Clase 6</th>
+        <th scope="col">Clase 7</th>
+        <th scope="col">Clase 8</th>
+        <th scope="col">Clase 9</th>
+        <th scope="col">Clase 10</th>
+        <th scope="col">Clase 11</th>
+        <th scope="col">Clase 12</th>
+        <th scope="col">Clase 13</th>
+        <th scope="col">Clase 14</th>-->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data  | filterPipe: searchterm | paginate: { itemsPerPage: 30, currentPage: page } let i=index">
+      <tr *ngFor="let item of data  | filterPipe: searchterm | paginate: { itemsPerPage: 100, currentPage: page } let i=index">
         
         <td>{{ item.namealumno }}</td>
         
-        <td> 
-          <input  [(ngModel)]="item.calificacion"  pattern="[0-9]{2}" type="number"  min="0" max="10" value={{item.calificacion}} onkeyup="if(value<0) value=0;if(value>10) value=10;"/>
-          <!--  [(ngModel)]="inputValues[item.dynamicName]"  <input [(ngmodel)]="data" type="number" value={{item.calificacion}}  name="input{{ i }}" name={{item.id }} min="0" max="10"  />-->
+        <td *ngFor="let day of fechas; let j=index"> 
+          <input  [(ngModel)]="this.alumnoasistencias[i][j] "  type="checkbox"/>
+          <!-- [(ngModel)]="asistencias[i]"    [(ngModel)]="inputValues[item.dynamicName]"  <input [(ngmodel)]="data" type="number" value={{item.calificacion}}  name="input{{ i }}" name={{item.id }} min="0" max="10"  />-->
         </td>
        
       </tr>
@@ -64,14 +79,4 @@
  
 
 
-  <button class ="btn btn-success"  (click)="registrarCalis()">Registrar calificaciones</button>
-
-
-  <!-- <select [(ngModel)] = calis >
-              <option value=NON> </option>
-                <option value=5>5</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-              </select>-->
+  <button class ="btn btn-success"  (click)="registrarAsistencia()">Guardar asistencias</button>

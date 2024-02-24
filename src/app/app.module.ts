@@ -28,6 +28,10 @@ import { ListarclasesmaestroComponent } from './Maestro/listarclasesmaestro/list
 import { CalificarclasemaestroComponent } from './Maestro/calificarclasemaestro/calificarclasemaestro.component';
 import { RegistraradminComponent } from './component/registraradmin/registraradmin.component';
 import { ListainscritoComponent } from './component/listainscrito/listainscrito.component';
+import { AsistenciaComponent } from './Maestro/asistencia/asistencia.component';
+import { PreinscripdocComponent } from './Alumnos/preinscripdoc/preinscripdoc.component';
+
+
 //import {AggridModule} from 'ag-grid-angular';
 
 @NgModule({
@@ -47,6 +51,9 @@ import { ListainscritoComponent } from './component/listainscrito/listainscrito.
     CalificarclasemaestroComponent,
     RegistraradminComponent,
     ListainscritoComponent,
+    AsistenciaComponent,
+    PreinscripdocComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,10 @@ import { ListainscritoComponent } from './component/listainscrito/listainscrito.
     
     //Ng2SearchPipeModule,//USED CUSTOM...
     HttpClientModule,
-    AgGridModule  //withComponents
+
+    AgGridModule
+    
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

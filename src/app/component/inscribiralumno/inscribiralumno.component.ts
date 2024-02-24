@@ -75,6 +75,7 @@ getcurso() //check if number..
     next: res=> {
       console.log(res);       
       this.data= res ;  
+      this.data = this.data['data']
   },
   error:error=>{
     console.log(error);
@@ -109,7 +110,21 @@ postinscripcion(customerData :any)
       
   next: res=> {
     console.log(res);  
-    window.alert("Inscripcion realizada: " + res);     
+    window.alert("Inscripcion realizada: ");    
+    
+    console.log(this.data)
+
+    this.data.forEach((element:any,index:number) => {
+      console.log(element);
+      if(element.id ==customerData.idcurso){
+
+        console.log("conincidio" + element.id +" con  " + customerData.idcurso)
+        this.data.splice(index,1);
+       //this.data.delete[index];
+      }
+    });
+    console.log(this.data)
+
     //this.data= res ;  
 },
 error:error=>{
@@ -147,8 +162,12 @@ this.formu.patchValue({
 
 inscribircurso(contentdata: any){
 
-  
-  
+  if(contentdata.namemaestro == '' || contentdata.namemaestro == null || contentdata.namemaestro == undefined ){
+
+    window.alert("Se necesita definir un maestro para el curso, edita este curso ");  
+    return;  
+  }
+  contentdata.asistencia="0"; //stops heavy bugs at maestro asistencias
   //console.log(contentdata);
   this.postinscripcion(contentdata);
 
