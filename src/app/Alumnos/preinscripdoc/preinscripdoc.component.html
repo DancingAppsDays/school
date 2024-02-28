@@ -1,21 +1,64 @@
 <div class="container">
     <div class="form-group row">
       <div class="col-sm text-center">
-        <h4 class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Preinscripciones</h4>
+        <h4 class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Preregistro / Postulacion</h4>
       </div>
     </div>
-
+    <div class="container" style="margin: 15px;">
+     
+        
+    
 <form  [formGroup] ="formu"   (ngSubmit)="onSubmit()">
 
+  <p>                                                
+    <input type="text" class="form-control" formControlName="name"  >
+    <strong>Nombre: </strong> 
+</p>
+<p>
+    <input type="text"  class="form-control" formControlName="phone"  pattern="^[0-9]{7,14}$" maxlength=14>
+    <strong>Telefono: </strong> 
+</p>
+<p>
+  <input type="email"  class="form-control" formControlName="email" email >
+  <strong>Email: </strong> 
+  <div *ngIf="formu.controls['email'].invalid && (formu.controls['email'].dirty || formu.controls['email'].touched)"  class="alert alert-info">
+    Ingresa un email válido</div>
+  <br><br>
+  <strong>CURP</strong><br>
+    <input type="file" name="file" title="aa "  id="file" (change)="handleUpload($event)">
+    
+    <!--<div *ngIf="formu.controls['curp'].invalid && (formu.controls['curp'].dirty || formu.controls['curp'].touched)"  class="alert alert-info">
+      {{doc1note}}</div>-->
+      <p>{{doc1note}}</p>
    
-       
-        <strong>Credencial de elector</strong>
-    <input type="file" name="file" id="file" (change)="handleUpload($event)">
-    <input hidden type="text " class="form-control" formControlName="doc1">
+    <input hidden type="text " class="form-control" formControlName="curp">
+    <img src="" id="doc1image"  alt="curp" width="100" height="100" *ngIf="this.image1bool">
+    
+    <br><br>
+    <strong>Credencial INE</strong><br>
+    <input type="file" name="file" id="file" title=" " (change)="handleUpload2($event)">
+    <input hidden type="text " class="form-control" formControlName="ine">
+    <p>{{doc2note}}</p>
+    <img src="" id="doc2image"  alt="credencial" width="100" height="100" *ngIf="this.image2bool">
+    
 
+    <br><br>
+    <strong>Carta</strong><br>
+    <input type="file" name="file" id="file" title=" " (change)="handleUpload3($event)">
+    <input hidden type="text " class="form-control" formControlName="carta">
+    <p>{{doc3note}}</p>
+    
+    
+    <br>
+    <strong>CV</strong><br>
+    <input type="file" name="file" id="file" title=" " (change)="handleUpload4($event)">
+    <input hidden type="text " class="form-control" formControlName="cv">
+    <p>{{doc4note}}</p>
   
-
+    <button type="submit" class="btn btn-primary" [disabled]="formu.invalid">Enviar</button>
 </form>
 
+
+</div>
 
 </div>

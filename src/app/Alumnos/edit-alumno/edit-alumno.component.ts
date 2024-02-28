@@ -30,7 +30,7 @@ export class EditAlumnoComponent implements OnInit {
 
   ngOnInit(): void {
 
-   // if(Constants.usertype!="Admin")this.router.navigate(['/'])
+    if(Constants.usertype!="Admin")this.router.navigate(['/'])
 
     //this should be taken from entity
     this.formu = this.formBuilder.group({

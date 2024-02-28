@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="form-group row">
+      <div class="col-sm text-center">
+        <h4 class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Preregistro / Postulacion</h4>
+      </div>
+    </div>
+    <div class="container" style="margin: 15px;">
+     
+        
+    
+
+    <form [formGroup] ="formu" >
+  <p>                                                
+    <input type="text" class="form-control" formControlName="name" readonly >
+    <strong>Nombre: </strong> 
+</p>
+<p>
+    <input type="number"  class="form-control" formControlName="phone" readonly pattern="^[0-9]{7,13}$"  >
+    <strong>Telefono: </strong> 
+</p>
+<p>
+  <input type="email"  class="form-control" formControlName="email" email readonly >
+  <strong>Email: </strong> 
+ 
+
+</form>
+  <br><br>
+  <strong>CURP</strong><br>
+
+  <img src="" id="image1"  alt="credencial" width="100" height="100">  
+  <a id="download1" type="button" class="btn btn-primary">Descargar</a>
+    
+    <br><br>
+    <strong>Credencial INE</strong><br>
+    <img src="" id="image2"  alt="credencial" width="100" height="100">  
+    <a id="download2" type="button" class="btn btn-primary">Descargar</a>
+    
+
+    <br><br>
+    <strong>Carta expositiva</strong><br>
+    <img src="./assets/img/documenticon.png" id="image3"  alt="credencial" width="100" height="100">  
+    <a id="download3" type="button" class="btn btn-primary">Descargar</a>
+    
+    
+    
+    <br>
+    <strong>CV</strong><br>
+    <img src="./assets/img/documenticon.png" id="image4"  alt="credencial" width="100" height="100">
+    <a id="download4" type="button" class="btn btn-primary">Descargar</a>
+
+
+
+
+</div>
+
+</div>
+

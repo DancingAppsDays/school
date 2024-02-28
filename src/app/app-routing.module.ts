@@ -15,6 +15,8 @@ import { ListainscritoComponent } from './component/listainscrito/listainscrito.
 import { RegistraradminComponent } from './component/registraradmin/registraradmin.component';
 import { AsistenciaComponent } from './Maestro/asistencia/asistencia.component';
 import { PreinscripdocComponent } from './Alumnos/preinscripdoc/preinscripdoc.component';
+import { ListapreregistrosComponent } from './component/listapreregistros/listapreregistros.component';
+import { VerpreregistrosComponent } from './component/verpreregistros/verpreregistros.component';
 
 
 const routes: Routes = [
@@ -33,8 +35,10 @@ const routes: Routes = [
 
   {path:'KardexAlumno',component:KardexComponent},
 
-  {path:'Preinscripdoc',component:PreinscripdocComponent},
+  {path:'PreRegistro',component:PreinscripdocComponent},
 
+  {path:'ListaPreRegistro',component:ListapreregistrosComponent},
+  {path:'VerPreRegistro',component:VerpreregistrosComponent},
 
 
   {path:'ListaClaseMaestro',component:ListarclasesmaestroComponent},

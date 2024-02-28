@@ -1,0 +1,63 @@
+<head>
+  <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+  <link    href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">  
+  <link    href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
+</head>
+
+
+
+
+
+
+<div class="container">
+    <div class="form-group row">
+      <div class="col-sm text-center">
+        <h4 class="d-block" style="background-color: #34495E; color:#fff; margin: 15px;">Ver postulantes</h4>
+      </div>
+    </div>
+
+   
+    <input type="text" [(ngModel)]="searchterm" placeholder="Buscar cadena">
+  
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  
+  <table class="table" *ngIf="data">
+    <thead>
+      <tr>
+        
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Email</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Ver</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ems of data  | filterPipe: searchterm | paginate: { itemsPerPage: 50, currentPage: page }">
+        <th scope="row">{{ ems.name }}</th>
+        <td>{{ ems.phone }}</td>
+        <td>{{ ems.email }}</td>
+        <td>{{ ems.created_at.substring(0,10) }}</td>
+       
+        <td> 
+            <button type="button" class="btn  btn-outline-primary" title="Ver Cursos" (click)="VerRegistro(ems)">Ver Cursos</button>  
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ag-grid-angular 
+  <ag-grid-angular
+    
+    class="ag-theme-alpine"
+    style=" height:800px;"
+  
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions" 
+      [rowClassRules]="gridOptions.rowClassRules"
+        
+
+        
+>
+</ag-grid-angular>-->

@@ -30,6 +30,8 @@ import { RegistraradminComponent } from './component/registraradmin/registraradm
 import { ListainscritoComponent } from './component/listainscrito/listainscrito.component';
 import { AsistenciaComponent } from './Maestro/asistencia/asistencia.component';
 import { PreinscripdocComponent } from './Alumnos/preinscripdoc/preinscripdoc.component';
+import { ListapreregistrosComponent } from './component/listapreregistros/listapreregistros.component';
+import { VerpreregistrosComponent } from './component/verpreregistros/verpreregistros.component';
 
 
 //import {AggridModule} from 'ag-grid-angular';
@@ -53,6 +55,8 @@ import { PreinscripdocComponent } from './Alumnos/preinscripdoc/preinscripdoc.co
     ListainscritoComponent,
     AsistenciaComponent,
     PreinscripdocComponent,
+    ListapreregistrosComponent,
+    VerpreregistrosComponent,
    
   ],
   imports: [
